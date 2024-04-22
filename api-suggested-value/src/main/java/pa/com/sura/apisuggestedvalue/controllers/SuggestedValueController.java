@@ -37,16 +37,11 @@ public class SuggestedValueController {
             @RequestParam(name = YEAR) String year) {
 
         logger.info("Test");
-        Map<String, String> response = new HashMap<>();
-        // response=suggestedValue.getSuggestedValueDto("asd", 100, "USE", 2020);
+        Map<String, String> response = new HashMap<>();       
         double original_value = Double.parseDouble(original_car_value);
         int buy_year = Integer.parseInt(year);
 
         response = suggestedValue.getSuggestedValueDto(ramo, original_value, use, buy_year);
-        // logger.debug("Current year: "+result);
-        // response.put("currentYear", result.getCurrentYear());
-        // response.put("suggestedValue", result.getSuggestedValue());
-        // response.put("suggestedValue", "ASD");
         return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
     }
 

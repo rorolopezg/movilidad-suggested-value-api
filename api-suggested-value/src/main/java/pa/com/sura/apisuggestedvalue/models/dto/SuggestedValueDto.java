@@ -1,4 +1,4 @@
-package pa.com.sura.apisuggestedvalue.models.Dtos;
+package pa.com.sura.apisuggestedvalue.models.dto;
 
 import java.io.Serializable;
 
