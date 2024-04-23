@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-suggested-value
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-suggested-value
+  template:
+    metadata:
+      labels:
+        app: api-suggested-value
+    spec:
+      containers:
+      - name: api-suggested-value
+        image: rodrigolopezkps/movilidad-suggested-value-api:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8003
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: api-suggested-value
+                key: port
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: api-suggested-value
+                key: db_host
+          - name: DB_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: api-suggested-value
+                key: database
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: api-suggested-value
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: api-suggested-value
+                key: password
