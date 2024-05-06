@@ -1,6 +1,7 @@
 package pa.com.sura.apisuggestedvalue.services;
-import java.util.Map;
+
+import pa.com.sura.apisuggestedvalue.models.dto.SuggestedValueDto;
 
 public interface CalcSuggestedValueService {
-    public Map<String,String> getSuggestedValueDto(String ramo, double originalCarValue, String use, int Year);
+    public SuggestedValueDto getSuggestedValueDto(double suma_aseg, String uso, String ramo, int year);
 }

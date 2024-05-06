@@ -1,46 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-suggested-value
+  name: movilidad-suggested-value-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api-suggested-value
+      app: movilidad-suggested-value-api
   template:
     metadata:
       labels:
-        app: api-suggested-value
+        app: movilidad-suggested-value-api
     spec:
       containers:
-      - name: api-suggested-value
-        image: rodrigolopezkps/movilidad-suggested-value-api:latest
-        imagePullPolicy: Never
+      - image: rodrigolopezkps/movilidad-suggested-value-api:latest
+        name: movilidad-suggested-value-api
         ports:
         - containerPort: 8003
         env:
           - name: PORT
             valueFrom:
               configMapKeyRef:
-                name: api-suggested-value
+                name: movilidad-suggested-value-api
                 key: port
           - name: DB_HOST
             valueFrom:
               configMapKeyRef:
-                name: api-suggested-value
+                name: movilidad-suggested-value-api
                 key: db_host
-          - name: DB_DATABASE
+          - name: DB_SN
             valueFrom:
               configMapKeyRef:
-                name: api-suggested-value
-                key: database
+                name: movilidad-suggested-value-api
+                key: service_name
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
-                name: api-suggested-value
+                name: movilidad-suggested-value-api
                 key: username
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: api-suggested-value
+                name: movilidad-suggested-value-api
                 key: password

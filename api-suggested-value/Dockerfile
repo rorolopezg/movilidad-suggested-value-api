@@ -29,4 +29,4 @@ ENV PORT $PORT_APP
 EXPOSE $PORT
 #ENTRYPOINT ["java", "-jar", "api-catalogs-0.0.1-SNAPSHOT.jar"]
 #CMD sleep 20 && java -jar api-catalogs-0.0.1-SNAPSHOT.jar
-CMD ["java", "-jar", "api-catalogs-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "api-suggested-value-0.0.1-SNAPSHOT.jar"]

@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SuggestedValueDto implements Serializable{
   private String currentYear;
-  private Long suggestedValue;
+  private double suggestedValue; 
 }

@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: api-suggested-value
+  name: movilidad-suggested-value-api
 data:
   port: "8003"
-  db_host: mysql8:3306
-  database: msvc_usuarios
+  db_host: 10.241.60.6:1521
+  service_name: orclpa_pdb1.desarrollopremi.premiumvcn.oraclevcn.com

@@ -12,13 +12,16 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
-@NamedStoredProcedureQuery(name = "getSuggestedValue", procedureName = "INSIS_CUST_SURA_UY.test_api_cursor", parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "ramo", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "original_car_value", type = Integer.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "use", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "year", type = Integer.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "current_year", type = Integer.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "suggested_value", type = Double.class)
+@NamedStoredProcedureQuery(name = "getSuggestedValue", procedureName = "SEGUROS.pkg_nube_seguros2.valor_sugerido_automovil", parameters = {
+        //in parameters        
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_suma_asegurada", type = Double.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_uso", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_ramo", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "p_ano_automovil", type = Integer.class),
+       //out parameters
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_ok", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_mensaje", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_valor_sugerido", type = Double.class)
 })
 public class SuggestedValue implements Serializable {
     @Id

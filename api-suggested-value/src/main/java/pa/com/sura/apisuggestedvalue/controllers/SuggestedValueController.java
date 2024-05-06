@@ -1,6 +1,6 @@
 package pa.com.sura.apisuggestedvalue.controllers;
 
-import java.util.HashMap;
+
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import pa.com.sura.apisuggestedvalue.models.dto.SuggestedValueDto;
 import pa.com.sura.apisuggestedvalue.services.CalcSuggestedValueServiceImpl;
 
 @RestController
@@ -37,12 +38,14 @@ public class SuggestedValueController {
             @RequestParam(name = YEAR) String year) {
 
         logger.info("Test");
-        Map<String, String> response = new HashMap<>();       
+        // Map<String, String> response = new HashMap<>();
+        SuggestedValueDto response = new SuggestedValueDto();
         double original_value = Double.parseDouble(original_car_value);
         int buy_year = Integer.parseInt(year);
 
-        response = suggestedValue.getSuggestedValueDto(ramo, original_value, use, buy_year);
-        return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+        response = suggestedValue.getSuggestedValueDto(original_value, use, ramo, buy_year);
+        // return new ResponseEntity<Map<String, String>>(response, HttpStatus.OK);
+        return new ResponseEntity<SuggestedValueDto>(response, HttpStatus.OK);
     }
 
 }

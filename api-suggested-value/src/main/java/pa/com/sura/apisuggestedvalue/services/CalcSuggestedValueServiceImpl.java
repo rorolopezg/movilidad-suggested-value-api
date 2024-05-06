@@ -1,7 +1,6 @@
 package pa.com.sura.apisuggestedvalue.services;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import jakarta.persistence.StoredProcedureQuery;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pa.com.sura.apisuggestedvalue.models.dto.SuggestedValueDto;
 
 @Service
 @Data
@@ -20,21 +20,38 @@ public class CalcSuggestedValueServiceImpl implements CalcSuggestedValueService 
     @Autowired
     private EntityManager manager;
 
-    public Map<String, String> getSuggestedValueDto(String ramo, double originalCarValue, String use, int year) {
+    public SuggestedValueDto getSuggestedValueDto(double suma_aseg, String uso, String ramo, int year) {
 
         StoredProcedureQuery query = manager.createNamedStoredProcedureQuery("getSuggestedValue");
-        String currentYear = "No found";
-        String suggestedValue = "No found";
-        query.setParameter("ramo", ramo);
-        query.setParameter("original_car_value", originalCarValue);
-        query.setParameter("use", use);
-        query.setParameter("year", year);
+        int currentYear = 0;
+        Object suggestedValue;
+        Object ok;
+        Object message;
+        // Map<String, String> result = new HashMap<>();
+        SuggestedValueDto result = new SuggestedValueDto();
+        query.setParameter("p_suma_asegurada", suma_aseg);
+        query.setParameter("p_uso", uso);
+        query.setParameter("p_ramo", ramo);
+        query.setParameter("p_ano_automovil", year);
         query.execute();
-        currentYear = query.getOutputParameterValue("current_year").toString();
-        suggestedValue = query.getOutputParameterValue("suggested_value").toString();
-        Map<String, String> result = new HashMap<>();
-        result.put("currentYear", currentYear);
-        result.put("suggestedValue", suggestedValue);
+        ok = query.getOutputParameterValue("p_ok");
+        message = query.getOutputParameterValue("p_mensaje");
+        suggestedValue = query.getOutputParameterValue("p_valor_sugerido");
+
+        Calendar cal = Calendar.getInstance();
+        currentYear = cal.get(Calendar.YEAR);
+        if (ok == null) {
+            result.setSuggestedValue(Double.parseDouble(suggestedValue.toString()));
+            result.setCurrentYear(Integer.toString(currentYear));
+        }
+        /*
+         * if (ok != null) result.put("ok", ok.toString());else result.put("ok",
+         * "Not Found");
+         * if (message != null) result.put("message", message.toString());else
+         * result.put("message", "Not Found");
+         * if (suggestedValue != null) result.put("suggestedValue",
+         * suggestedValue.toString());else result.put("suggestedValue", "Not Found");
+         */
         return result;
     }
 
